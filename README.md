@@ -84,26 +84,6 @@ Returns generated media URLs associated with the authenticated user.
 | `audio` | Extracts MP3 audio |
 | `proxy` | Creates lightweight preview versions |
 ---
-## Project Structure
-
-```text
-src/
-├── controller/
-├── service/
-├── repository/
-├── model/
-└── config/
-```
----
-
-## Running Locally
-
-```bash
-git clone <repository>
-cd vidicraft
-./mvnw spring-boot:run
-```
-
 ### Requirements
 
 - Java 21
