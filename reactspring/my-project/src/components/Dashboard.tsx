@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
+import { transcodeVideo } from '../utils/api';
+import '../App.css'
+
 
 const Dashboard: React.FC = () => {
     const { logout } = useAuth();
@@ -12,24 +15,9 @@ const Dashboard: React.FC = () => {
             return;
         }
 
-        const formData = new FormData();
-        formData.append("file", videoFile);
-
         try {
-            const response = await fetch("http://localhost:8080/api/v1/auth/transcode", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error("Transcoding failed");
-            }
-
-            const text = await response.text();
-            setStatus(text);
+            const result = await transcodeVideo(videoFile);
+            setStatus(result);
         } catch (err) {
             setStatus(err instanceof Error ? err.message : "Error");
         }
